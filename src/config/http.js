@@ -4,7 +4,7 @@
  */
 import axios from 'axios'
 import { Message } from 'element-ui'
-import baseURL from './baseURL'
+import baseURL from './baseUrl'
 
 // 创建axios实例
 const instance = axios.create({
