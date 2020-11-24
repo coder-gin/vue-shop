@@ -15,7 +15,7 @@ const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(config => {
   // 添加token验证
-  const token = localStorage.getItem('token')
+  const token = window.sessionStorage.getItem('token')
   token && (config.headers.Authorization = token)
   return config
 }, err => Promise.reject(err))

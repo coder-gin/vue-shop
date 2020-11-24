@@ -7,17 +7,19 @@
       </div>
       <!-- 登录表单数据 -->
       <el-form
-        :model="loginForm"
         class="login-form"
+        :model="loginForm"
+        :rules="loginFormRules"
+        ref="loginFormRef"
         @submit.prevent.native="login"
       >
-        <el-form-item>
+        <el-form-item prop="username">
           <el-input
             prefix-icon="iconfont icon-user"
             v-model="loginForm.username"
           ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input
             type="password"
             prefix-icon="iconfont icon-3702mima"
@@ -26,7 +28,7 @@
         </el-form-item>
         <el-form-item class="btn">
           <el-button type="primary" native-type="submit">登录</el-button>
-          <el-button type="info">重置</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -37,22 +39,46 @@
 export default {
   data () {
     return {
+      // 登录表单数据绑定
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
+      },
+      // 表单验证规则
+      loginFormRules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
-    async login () {
-      const res = await this.$api.login(this.loginForm)
-      if (res.meta.status === 200) {
-        this.$message.success(res.meta.msg)
-        this.$router.push('/home')
-      }
-      // console.log(res)
+    login () {
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return
+        // 
+        const res = await this.$api.login(this.loginForm)
+        console.log(res)
+        if (res.meta.status === 200) {
+          this.$message.success(res.meta.msg)
+          this.$router.push('/home')
+          // 将登录成功之后的token保存在sessionStorage中
+          window.sessionStorage.setItem('token', res.data.token)
+        } else {
+          this.$message.error(res.meta.msg)
+        }
+      })
+    },
+    // 重置登录表单，将其值重置为初始值并移除校验结果
+    resetLoginForm () {
+      this.$refs.loginFormRef.resetFields()
     }
-  },
+  }
 }
 </script>
 

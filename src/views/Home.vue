@@ -9,9 +9,10 @@
 export default {
   methods: {
     logout () {
-
+      window.sessionStorage.removeItem('token')
+      this.$router.push('/login')
     }
-  },
+  }
 }
 </script>
 
