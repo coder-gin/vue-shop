@@ -61,17 +61,13 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
-        // 
         const res = await this.$api.login(this.loginForm)
-        console.log(res)
-        if (res.meta.status === 200) {
-          this.$message.success(res.meta.msg)
-          this.$router.push('/home')
-          // 将登录成功之后的token保存在sessionStorage中
-          window.sessionStorage.setItem('token', res.data.token)
-        } else {
-          this.$message.error(res.meta.msg)
-        }
+        // console.log(res)
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+        this.$message.success(res.meta.msg)
+        // 将登录成功之后的token保存在sessionStorage中
+        window.sessionStorage.setItem('token', res.data.token)
+        this.$router.push('/home')
       })
     },
     // 重置登录表单，将其值重置为初始值并移除校验结果
