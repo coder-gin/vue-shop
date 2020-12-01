@@ -3,10 +3,12 @@
  */
 import axios from '@/config/http'
 
-export function getRightsList (type) {
+// 所有权限列表
+export function _getRightsList (type) {
   return axios.get(`rights/${type}`)
 }
 
-export function getMenuList () {
+// 左侧菜单权限
+export function _getMenuList () {
   return axios.get('menus')
 }
