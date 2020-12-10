@@ -7,6 +7,8 @@ const Login = () => import('@/views/Login')
 const Home = () => import('@/views/Home')
 const Welcome = () => import('@/views/Welcome')
 const User = () => import('@/views/user/User')
+const Roles = () => import('@/views/power/Roles')
+const Rights = () => import('@/views/power/Rights')
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -18,6 +20,8 @@ const routes = [
     children: [
       { path: '/welcome', component: Welcome },
       { path: '/users', component: User },
+      { path: '/roles', component: Roles },
+      { path: '/rights', component: Rights },
     ]
   }
 ]

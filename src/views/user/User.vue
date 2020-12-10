@@ -243,7 +243,7 @@ export default {
     },
     // 删除角色
     delUser (rowdata) {
-      console.log(rowdata)
+      // console.log(rowdata)
       this.$confirm(`此操作将永久删除用户${rowdata.username}, 是否继续?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

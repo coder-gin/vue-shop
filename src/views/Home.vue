@@ -129,6 +129,10 @@ export default {
     height: 100%;
     background-color: #333645;
 
+    .el-menu {
+      border-right: none;
+    }
+
     .toggle-button {
       letter-spacing: 2px;
       background-color: #4a4e65;

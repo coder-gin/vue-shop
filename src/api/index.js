@@ -4,6 +4,7 @@
 import axios from '@/config/http'
 import { _getRightsList, _getMenuList } from './rights'
 import { _getUsersList, _addUser, _updateUserState, _getUserInfo, _updateUserInfo, _delUser, _assignUserRoles } from './user'
+import { _getRolesList, _addRole, _getRoleInfo, _updateRoleInfo, _delRole, _RoleRights, _delRoleRights } from './roles'
 
 
 const api = {
@@ -21,7 +22,15 @@ const api = {
   _getUserInfo,
   _updateUserInfo,
   _delUser,
-  _assignUserRoles
+  _assignUserRoles,
+  // 角色管理
+  _getRolesList,
+  _addRole,
+  _getRoleInfo,
+  _updateRoleInfo,
+  _delRole,
+  _RoleRights,
+  _delRoleRights
 }
 
 export default api
